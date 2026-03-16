@@ -1272,6 +1272,51 @@
             el.style.transition = 'all 0.6s ease-out';
             observer.observe(el);
         });
+    // Mortgage Calculator
+        function calcularHipoteca() {
+            // Get values
+            const precioVivienda = parseFloat(document.getElementById('precio-vivienda').value) || 0;
+            const porcentajeFinanciacion = parseFloat(document.getElementById('porcentaje-financiacion').value) || 0;
+            const anosFinanciacion = parseFloat(document.getElementById('anos-financiacion').value) || 0;
+            const tipoInteres = parseFloat(document.getElementById('tipo-interes').value) || 0;
+
+            // Calculate
+            const importeFinanciar = precioVivienda * (porcentajeFinanciacion / 100);
+            const meses = anosFinanciacion * 12;
+            const interesMensual = (tipoInteres / 100) / 12;
+
+            // Monthly payment formula
+            let cuotaMensual = 0;
+            if (interesMensual > 0) {
+                cuotaMensual = importeFinanciar * (interesMensual * Math.pow(1 + interesMensual, meses)) / (Math.pow(1 + interesMensual, meses) - 1);
+            } else {
+                cuotaMensual = importeFinanciar / meses;
+            }
+
+            const totalPagar = cuotaMensual * meses;
+            const totalIntereses = totalPagar - importeFinanciar;
+
+            // Update UI
+            document.getElementById('importe-financiar').textContent = formatNumber(importeFinanciar) + ' €';
+            document.getElementById('cuota-mensual').textContent = formatNumber(cuotaMensual) + ' €';
+            document.getElementById('total-intereses').textContent = formatNumber(totalIntereses) + ' €';
+            document.getElementById('total-pagar').textContent = formatNumber(totalPagar) + ' €';
+        }
+
+        function formatNumber(num) {
+            return Math.round(num).toLocaleString('es-ES');
+        }
+
+        // Add event listeners to all inputs
+        ['precio-vivienda', 'porcentaje-financiacion', 'anos-financiacion', 'tipo-interes'].forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.addEventListener('input', calcularHipoteca);
+            }
+        });
+
+        // Initial calculation
+        calcularHipoteca();
     </script>
 </body>
 </html>
