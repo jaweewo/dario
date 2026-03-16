@@ -471,6 +471,163 @@
             color: var(--text-color);
             line-height: 1.8;
         }
+        /* Calculator Section */
+        .calculator-section {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .calculator-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .calculator-section h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .calculator-intro {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin-bottom: 3rem;
+        }
+
+        .calculator-card {
+            background: var(--light-gray);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            text-align: left;
+        }
+
+        .calculator-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+        }
+
+        .input-with-suffix {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-with-suffix input {
+            width: 100%;
+            padding: 1rem 3.5rem 1rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            background: var(--white);
+            transition: border-color 0.3s ease;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .input-with-suffix input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .input-with-suffix .suffix {
+            position: absolute;
+            right: 1rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+            pointer-events: none;
+        }
+
+        .calculator-results {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: 10px;
+        }
+
+        .main-result {
+            padding: 2rem;
+            background: var(--primary-color);
+            color: var(--white);
+            border-radius: 15px;
+        }
+
+        .main-result .result-label {
+            color: var(--white);
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .main-result .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--white);
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .result-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        .result-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .calculator-disclaimer {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .calculator-disclaimer p {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+        }
+
+        .calculator-disclaimer strong {
+            color: var(--primary-color);
+        }
 
         /* Process Section */
         .process {
@@ -707,7 +864,11 @@
             .process-steps {
                 grid-template-columns: 1fr;
             }
-
+            .calculator-card {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem;
+            }
             .services h2,
             .process h2,
             .testimonials h2,
@@ -893,7 +1054,76 @@
 </div>
         </div>
     </section>
+    <!-- Mortgage Calculator Section -->
+    <section class="calculator-section" id="calculadora">
+        <div class="calculator-container">
+            <p class="section-title">Calculadora</p>
+            <h2>Calcula tu hipoteca</h2>
+            <p class="calculator-intro">Descubre cuánto pagarías cada mes de forma orientativa</p>
+            
+            <div class="calculator-card">
+                <div class="calculator-inputs">
+                    <div class="input-group">
+                        <label for="precio-vivienda">Precio de la vivienda</label>
+                        <div class="input-with-suffix">
+                            <input type="number" id="precio-vivienda" value="200000" min="0" step="1000">
+                            <span class="suffix">€</span>
+                        </div>
+                    </div>
 
+                    <div class="input-group">
+                        <label for="porcentaje-financiacion">Porcentaje a financiar</label>
+                        <div class="input-with-suffix">
+                            <input type="number" id="porcentaje-financiacion" value="80" min="0" max="100" step="5">
+                            <span class="suffix">%</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="anos-financiacion">Años de financiación</label>
+                        <div class="input-with-suffix">
+                            <input type="number" id="anos-financiacion" value="30" min="1" max="40" step="1">
+                            <span class="suffix">años</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="tipo-interes">Tipo de interés (fijo)</label>
+                        <div class="input-with-suffix">
+                            <input type="number" id="tipo-interes" value="3.0" min="0" max="10" step="0.1">
+                            <span class="suffix">%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-results">
+                    <div class="result-item main-result">
+                        <span class="result-label">Cuota mensual</span>
+                        <span class="result-value" id="cuota-mensual">843 €</span>
+                    </div>
+                    
+                    <div class="result-details">
+                        <div class="result-item">
+                            <span class="result-label">Importe a financiar</span>
+                            <span class="result-value" id="importe-financiar">160.000 €</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Total intereses</span>
+                            <span class="result-value" id="total-intereses">143.480 €</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Total a pagar</span>
+                            <span class="result-value" id="total-pagar">303.480 €</span>
+                        </div>
+                    </div>
+
+                    <div class="calculator-disclaimer">
+                        <p><strong>Nota:</strong> Esta es una simulación orientativa. El tipo de interés y las condiciones finales pueden variar según tu perfil y la entidad financiera.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Process Section -->
     <section class="process" id="proceso">
         <div class="process-container">
